@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="all-questions"></div>
+    <script>
+        let allQuestions = document.querySelector(".all-questions")
+        let questions = `Когда распался Тюркский каганат? в 80-х годах VI века
+Где была столица Восточного Тюркского каганата? В долине Отукан
+Где была столица Западного Тюркского каганата? В Семиречье
+Когда Западный Тюркский каганат достиг высокой степени развитости?в 4 четверти VII века
+В эпоху правления какого правителя в Западном Тюркском каганате была реформирована система управления? Тун Ябгу
+Как назывались наместники в управлении каганом в Западном Тюркском каганате? тудуны
+В каком году Танская империя захватила Восточный Тюркский каганат? 630
+В каком году образовался Второй Восточный Тюркский каганат? 682
+Кто возглавлял восстание тюрков в 682 году? Кутиуг
+Кто и когда захватил Восточный каганат? уйгуры в 744 году
+Сколько просуществовал Уйгурский каганат? с 744-840
+Назовите годы жизни Мухаммада Шейбани Хана? 1451-1510
+Кто был дедом Мухаммада Шейбани Хана? Абдулхайрхан
+Когда распалось государство “Узбекский улус” Абулхаир Хана? в 1468 году
+Когда Мухаммад Шейбани хан восстановил Узбекский улус? 1480
+Когда и из-за чего распался Хорасан? из-за двоевластия в 1506
+Какая цель была у Шейбани хана? Завоевать государство Тимуридов 
+Когда Шейбани хан окончательно овладел Самаркандом? 1501 году
+Когда Мухаммад Шейбани хан завоевал Ташкент и Шахрухию?1503
+Когда Мухаммад Шейбани хан завоевал Фергану? 1504
+Когда Мухаммад Шейбани хан завоевал Хорезм?1505
+Когда Мухаммад Шейбани хан завоевал Хорасан?1507
+Когда Мухаммад Шейбани хан окончательно подчинил всю Среднюю Азию? 1507
+Когда и в каком сражении погиб Мухаммад Шейбани хан? В 1510 году в сражении с Исмаилом Сефеви вблизи Мерва
+Когда Римская империя разделилась на Западную и Восточную? в 395 году
+Столица Западной Римской империи? Рим
+Столица Восточной Римской империи? Константинополь 
+Сколько правителей сменилось в Западной Римской империи за 21 год? девять
+Когда пала Западная Римская империя? 4 сентября 476 года 
+Кто был последним императором Рима? Ромул Август 
+Когда пала Восточная римская империя? в 1453 году
+Из какой династии был Дарий I? Ахеменидской 
+В каких годах он правил? 522-486 до н.э
+Когда родился Дарий I? в 550 году до н.э
+Когда Дарий I  ввел монетную единицу золотой дарик?517 году
+Каков вес золотого дарика?8.4 грамма
+Когда Дарий I установил государственную налоговую единицу? в 518 году до н.э
+Как называлась столица которую построил Дарий I? Парса
+Когда умер Дарий I? в 486 году до н.э`
+        let quesArr = questions.split("\n")
+        count = 0
+        quesArr.forEach((q) => {
+            count++
+            let questionEl = q.split("?")
+            question = questionEl[0]
+            answer = questionEl[1]
+            let questionDiv = document.createElement("div")
+            questionDiv.setAttribute("class", "question-div")
+
+
+            let leftPart = document.createElement("div")
+            leftPart.setAttribute("class", "left-part")
+            let innerLeftPart = document.createElement("div")
+            let p = document.createElement("p")
+            p.innerHTML = count+" "+question
+
+            innerLeftPart.appendChild(p)
+            leftPart.appendChild(innerLeftPart)
+            questionDiv.appendChild(leftPart)
+
+
+            let rightPart = document.createElement("div")
+            rightPart.setAttribute("class", "right-part")
+            let innerRightPart = document.createElement("div")
+            let RightP = document.createElement("p")
+            RightP.innerHTML = answer
+            RightP.style.display = "none"
+            innerRightPart.appendChild(RightP)
+            rightPart.appendChild(innerRightPart)
+            questionDiv.appendChild(rightPart)
+            let showBtn = document.createElement("button")
+            showBtn.innerHTML = "show answer"
+            showBtn.onclick = function () {
+                RightP.style.display = "block"
+
+            }
+            rightPart.appendChild(showBtn)
+
+            let checkInp = document.createElement("input")
+            checkInp.type = "checkbox"
+            rightPart.appendChild(checkInp)
+
+            questionDiv.appendChild(rightPart)
+            allQuestions.appendChild(questionDiv)
+        })
+ 
+    </script>
+</body>
+
+</html>

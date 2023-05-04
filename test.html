@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text">
+    <button>Create</button>
+
+    <div class="main">
+    </div>
+
+    <script>
+        const input = document.querySelector('input');
+        const mainDiv =  document.querySelector('.main');
+        presetElements()
+        let counter = 0
+        input.addEventListener('change', function() {
+            counter++ 
+            let localStorageData = JSON.parse(getLocalStorage())
+            let newDiv = `
+                            <div id='div-${counter}'>
+                                ${input.value}
+
+                                <button onclick="deleteEl(this.parentNode)">
+                                    &times;
+                                </button>
+                            </div>
+                        `
+            localStorageData.push(newDiv)
+            saveLocalStorage(JSON.stringify(localStorageData))
+            presetElements()
+            input.value = ""
+        }) 
+        function presetElements() {
+            mainDiv.innerHTML = ""
+            let localData = getLocalStorage()
+            for (let el of JSON.parse(localData)) {
+                mainDiv.innerHTML += el
+            }
+        }
+        // JSON.stringify([])  => '[]'
+        // JSON.parse('[]')    => []
+
+        function deleteEl(node) {
+            if (confirm('Delete?')) {
+                mainDiv.removeChild(node)
+            } else {
+                console.log('You pressed NOT')
+            }
+        }
+        function saveLocalStorage(item) {
+            localStorage.setItem('item', item)
+        }
+        function getLocalStorage() {
+            let item = localStorage.getItem('item')
+            if (item == null) {
+                return '[]'
+            } else {
+                return item
+            }
+        }
+        // localStorage  => is a place where we can store data
+        // localStorage.setItem('item', 'value')  => creates a 'key-value' pair data
+        // localStorage.getItem('item')           => returns the value of the 'key'
+        // local-storage => локальное хранилище
+    </script>
+</body>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        text-align: center;
+    }
+    .main {
+        width: 100%;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px;
+    }
+    input, button {
+        padding: 8px 16px;
+        background-color: lightgray;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+    }
+    .main > div {
+        background-color: darkgray;
+        padding: 10px;
+    }
+
+</style>
+</html>
