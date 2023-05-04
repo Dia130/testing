@@ -67,7 +67,7 @@
             leftPart.setAttribute("class", "left-part")
             let innerLeftPart = document.createElement("div")
             let p = document.createElement("p")
-            p.innerHTML = count+" "+question
+            p.innerHTML = count + " " + question
 
             innerLeftPart.appendChild(p)
             leftPart.appendChild(innerLeftPart)
@@ -87,9 +87,18 @@
             showBtn.innerHTML = "show answer"
             showBtn.onclick = function () {
                 RightP.style.display = "block"
-
+                hideBtn.style.display = "block"
             }
+            let hideBtn = document.createElement("button")
+            hideBtn.innerHTML = "hide answer"
+            hideBtn.style.display = "none"
+            hideBtn.onclick = function () {
+                RightP.style.display = "none"
+                hideBtn.style.display = "none"
+            }
+
             rightPart.appendChild(showBtn)
+            rightPart.appendChild(hideBtn)
 
             let checkInp = document.createElement("input")
             checkInp.type = "checkbox"
@@ -98,7 +107,7 @@
             questionDiv.appendChild(rightPart)
             allQuestions.appendChild(questionDiv)
         })
- 
+
     </script>
 </body>
 
